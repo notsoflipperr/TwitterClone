@@ -1,0 +1,208 @@
+@import url(https://db.onlinewebfonts.com/c/e4e7ef6e4c35082a9095544d0a6e639d?family=Core+Sans+NR+83+Ext+Heavy);
+.login-container {
+    display: flex;
+    flex: 2;
+    width: 100vw;
+}
+
+.form-container {
+flex: 0;
+padding: 50px;
+align-content: center;
+}
+
+.form-box {
+    justify-content: left;
+    align-items: inherit;
+    grid-row: auto;
+
+
+    
+}
+.form-box1 {
+    justify-content: left;
+    align-items: inherit;
+    grid-row: auto;
+    margin-top: 20%;
+}
+
+.Twitter-img {
+    color: skyblue;
+    width: 3em !important;
+    height: 3em !important;
+    margin-top: -5%;
+   
+}
+
+.input-form {
+    width: 20px;
+}
+
+.heading,
+h1 {
+    font-size: 40px;
+    font-family: "Core Sans NR 83 Ext Heavy";
+    width: 100%;
+    
+}
+.heading1,
+h3 {
+    font-size: 35px;
+    font-family: "Core Sans NR 83 Ext Heavy";
+    width: 100%;
+   
+    
+}
+.Sheading,
+h1 {
+    font-size: 40px;
+    font-family: "Core Sans NR 83 Ext Heavy";
+    width: 100%;
+    height: 100%;
+    margin-top: -0%;
+    
+}
+.Sheading1,
+h3 {
+    font-size: 30px;
+    font-family: "Core Sans NR 83 Ext Heavy";
+    width: 100%;
+   
+    
+}
+
+.image-container {
+    flex: 2;
+    margin-left: -auto;
+    
+
+}
+.image {
+    width: 100%;
+    height: 100%;
+    
+}
+.image1 {
+    width: 100%;
+    height: 100%;
+    
+}
+
+input{
+    display: grid;
+    margin-bottom: 1px;
+    margin-top: 20px;
+    background-color: #E8F0FE;
+    width: 500px;
+    border-radius: 8px;
+    padding: 14px;
+    border: none;
+    outline: none;
+
+}
+
+.email,
+.password {
+    background-color: #E8F0FE;
+    width: 500px;
+    border-radius: 8px;
+    padding: 14px;
+    border: none;
+    outline: none;
+   
+}
+
+.display-name {
+    background-color: #E8F0FE;
+    width: 500px;
+    border-radius: 8px;
+    padding: 14px;
+    border: none;
+    outline: none;
+}
+
+.btn-Login {
+    padding: 7px;
+}
+
+.btn {
+    background-color: rgb(92, 199, 341);
+    width: 75%;
+    margin-right: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.g-btn {
+    border: 1px solid;
+    height: 53px !important;
+    line-height: 53px !important;
+    font-size: 15px !important;
+    width: 60% !important;
+    margin: 10px;
+    border-radius: 40px !important;
+    background-color: transparent !important;
+    
+}
+
+.google-button {
+    margin-top: 1%;
+    margin-left: 25%;
+    
+    
+}
+
+.g-btn>div,
+.g-btn>div>svg {
+    height: 50px !important;
+    width: 50px !important;
+    border-radius: 50px !important;
+    background-color: transparent;
+    margin-left: 20px;
+}
+
+
+.errorMessage {
+    color: red;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+.signUpText>Link {
+    text-decoration: none;
+    color: var(--twitter-color) !important;
+}
+
+@media screen and (max-width: 688px) {
+    .login-container{
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        font-size: 20px
+    }
+    .form-container {
+        padding: 10px;
+    }
+
+    .image-container {
+        width: 100%;
+        vertical-align: text-bottom;
+        display: flex;
+        flex-direction: column-reverse;
+        order: 1;
+        max-width: 100%;
+     
+    }
+    .image {
+        order: 2;
+        width: 100%;
+        height: 100%;
+        margin-left: 100px;
+    }
+};
+    
