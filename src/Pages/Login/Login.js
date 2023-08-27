@@ -5,7 +5,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import auth from '../../firebase.init';
 import './Login.css';
 import GoogleButton from 'react-google-button';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -22,7 +22,7 @@ const Login = () => {
         error,
       ] = useSignInWithEmailAndPassword(auth);
 
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
 
     if(user || googleUser){
         navigate('/')

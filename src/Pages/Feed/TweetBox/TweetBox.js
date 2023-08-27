@@ -3,7 +3,6 @@ import { Avatar, Button } from '@mui/material';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './TweetBox.css';
 import axios from 'axios';
-import { convertLength } from '@mui/material/styles/cssUtils';
 import useLoggedInUser from '../../../Hooks/useLoggedInUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';

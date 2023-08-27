@@ -1,4 +1,3 @@
-import { colors } from '@mui/material';
 import React from 'react';
 import { useMatch, useResolvedPath } from 'react-router';
 import { Link } from 'react-router-dom';
