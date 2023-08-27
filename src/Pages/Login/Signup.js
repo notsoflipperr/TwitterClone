@@ -48,7 +48,7 @@ const Signup = () => {
             email: email,
         }
 
-        axios.post('http://localhost:5000/register', user)
+        axios.post('https://twitter-clone-f5od.onrender.com/register', user)
         
     }
     const handleGoogleSignIn = () => {
