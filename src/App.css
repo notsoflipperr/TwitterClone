@@ -5,8 +5,8 @@ body {
 
 .app {
   display: flex;
-  height: 100vh;
-  width: 195vh;
+  height: 100vh; 
+  /* width: 195vh;  */
   max-width: 1500px;
   max-height: 1000px;
   /* margin-left: auto;
@@ -16,7 +16,7 @@ body {
   padding: 0 10px;
 }
 
-@media screen and (max-width:1500px) {
+@media screen and (max-width:688px) {
   .app {
     display: block;
   }
