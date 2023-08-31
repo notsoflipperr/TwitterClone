@@ -10,6 +10,11 @@ flex: 0;
 padding: 50px;
 align-content: center;
 }
+.form-containerL {
+flex: 1.12;
+padding: 50px;
+align-content: center;
+}
 
 .form-box {
     justify-content: left;
@@ -163,7 +168,7 @@ input{
     width: 50px !important;
     border-radius: 50px !important;
     background-color: transparent;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 

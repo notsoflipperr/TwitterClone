@@ -95,6 +95,22 @@ const Login = () => {
                         Signup 
                         </Link>
                     </div>
+                   
+                    Or
+                    <div>
+                        Login using
+                        <Link 
+                        to='/PhoneNumber'
+                        style={{
+                            textDecoration: 'none',
+                            color: 'skyblue',
+                            fontWeight: '600',
+                            marginLeft: '5px'
+                        }}
+                        >
+                        Phone Number
+                        </Link>
+                    </div>
                 </div>
             </div>
             </div>

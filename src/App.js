@@ -14,6 +14,7 @@ import Lists from './Pages/Lists/Lists';
 import Feed from './Pages/Feed/Feed';
 import Profile from './Pages/Profile/Profile';
 import More from './Pages/More/More';
+import PhoneNumber from './Pages/Login/PhoneNumber';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         </Route>
         <Route path='/login' element = {<Login />} />
         <Route path='/signup' element = {<Signup />} />
+        <Route path='/phonenumber' element = {<PhoneNumber />} />
         <Route path='/page-loading' element = {<PageLoading />} />
 
       </Routes>
