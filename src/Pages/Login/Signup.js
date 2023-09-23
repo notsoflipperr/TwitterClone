@@ -12,6 +12,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUserName] = useState('');
+    const [phonenumber, setPhoneNumber] = useState('');
     const [name, setName] = useState('');
     const navigate = useNavigate();
 
@@ -22,20 +23,7 @@ const Signup = () => {
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
 
-      const [signInWithGoogle, googleUser ] = useSignInWithGoogle(auth);
-
-    
-    if(user || googleUser){
-        navigate('/')
-        console.log(user)
-        console.log(googleUser)
-    }
-    if(error){
-        console.log(error.message)
-    }
-    if(loading){
-        console.log('loading.....')
-    }
+      const [signInWithGoogle, googleUser ] = useSignInWithGoogle(auth)
 
 
     const handleSubmit = e => {
@@ -46,15 +34,31 @@ const Signup = () => {
             username: username,
             name: name,
             email: email,
+            phonenumber: phonenumber
         }
 
-        axios.post('https://twitter-clone-f5od.onrender.com/register', user)
+        axios.post('http://localhost:5000/register', user)
         
     }
     const handleGoogleSignIn = () => {
         signInWithGoogle();
     }
     
+    if(user){
+        navigate('/')
+        console.log(user.phonenumber)
+    }
+    if(googleUser){
+        navigate('/')
+        console.log(googleUser)
+    }
+    if(error){
+        console.log(error.message)
+    }
+    if(loading){
+        console.log('loading.....')
+    }
+
 
     return (
         <div className='login-container'>
@@ -91,6 +95,12 @@ const Signup = () => {
                         className='password'
                         placeholder='Password'
                         onChange={(e) => setPassword(e.target.value)} 
+                        />
+                        <input 
+                        type="text"
+                        className='phonenumber'
+                        placeholder='Phone Number'
+                        onChange={(e) => setPhoneNumber(e.target.value)} 
                         />
                         <div className="btn-Login">
                             <button type='submit' className='btn'>Sign Up</button>

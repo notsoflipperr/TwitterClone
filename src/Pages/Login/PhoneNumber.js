@@ -1,9 +1,9 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import twitterImg from '../../assets/Frontpage.png';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import firebase from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import './Login.css';
 // import { getAuth, RecaptchaVerifier } from "firebase/auth";
 
@@ -14,10 +14,21 @@ const PhoneNumber = () => {
   const [ph, setPh] = useState("");
   // const [loading, setLoading] = useState(false);
   // const [showOTP, setShowOTP] = useState(false);
-  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
 
   const navigate = useNavigate();
+  const phonenumber = "+91" + ph ;
+  // const email = "nsfw@gmail.com"
+  // const name = "akif"
+  // const username = "nsfw"
 
+  useEffect(()=>{
+    fetch(`http://localhost:5000/getPhone?phonenumber=${phonenumber}`)
+    .then(res => res.json())
+    .then(data => {
+        setUser(data)
+    })
+}, [user, phonenumber])
 
   const PHhandleChange = (e) => {
     setPh(e.target.value);
@@ -36,6 +47,9 @@ const PhoneNumber = () => {
       },
       defaultCountry : "IN"
     });
+
+    console.log(user)
+    
 }
 
     const onSignInSubmit = (e) =>{
@@ -43,11 +57,12 @@ const PhoneNumber = () => {
       // setLoading(true);
       configureCaptcha();
       
-      const phoneNumber = "+91" + ph ;
-      console.log(phoneNumber)
+     
+      console.log(phonenumber)
+      console.log(typeof phonenumber)
       
       const appVerifier = window.recaptchaVerifier;
-      firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+      firebase.auth().signInWithPhoneNumber(phonenumber, appVerifier)
       .then((confirmationResult) => {
       window.confirmationResult = confirmationResult;
       console.log('OTP has been sent');
