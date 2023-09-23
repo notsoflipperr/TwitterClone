@@ -82,7 +82,7 @@ export default function EditProfile({ user, loggedInUser }) {
       dob,
     }
     console.log(editedInfo);
-    fetch(`https://twitter-clone-f5od.onrender.com/userUpdates/${user?.email}`, {
+    fetch(`http://localhost:5000/userUpdates/${user?.email}`, {
       method: "PATCH",
       headers: {
         'content-type': 'application/json'
