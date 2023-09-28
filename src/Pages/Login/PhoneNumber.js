@@ -57,10 +57,6 @@ const PhoneNumber = () => {
       // setLoading(true);
       configureCaptcha();
       
-     
-      console.log(phonenumber)
-      console.log(typeof phonenumber)
-      
       const appVerifier = window.recaptchaVerifier;
       firebase.auth().signInWithPhoneNumber(phonenumber, appVerifier)
       .then((confirmationResult) => {

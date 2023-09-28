@@ -7,6 +7,8 @@ import GoogleButton from 'react-google-button';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import  axios  from 'axios';
+import { PhoneAuthProvider, RecaptchaVerifier } from 'firebase/auth';
+import firebase from '../../firebase';
 const Signup = () => {
 
     const [email, setEmail] = useState('');
@@ -14,8 +16,21 @@ const Signup = () => {
     const [username, setUserName] = useState('');
     const [phonenumber, setPhoneNumber] = useState('');
     const [name, setName] = useState('');
+    const [otpSent, setOtpSent] = useState(false);
+    const [otp, setOtp] = useState('');
+    const [verificationId, setVerificationId] = useState(null);
+
     const navigate = useNavigate();
 
+    const configureCaptcha = () => {
+        window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+          'size': 'invisible',
+          'callback': (response) => {
+            console.log("ReCaptcha Verified")
+          },
+          defaultCountry : "IN"
+        });
+    }
     const [
         createUserWithEmailAndPassword,
         user,
@@ -26,9 +41,32 @@ const Signup = () => {
       const [signInWithGoogle, googleUser ] = useSignInWithGoogle(auth)
 
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        createUserWithEmailAndPassword(email, password)
+        let flag = false;
+
+        await axios.get('http://localhost:5000/loggedInUser?email=' + email)
+            .then(res => res.data)
+            .then(data => {
+                if(data.length > 0) {
+                    console.log("email already exists");
+                    flag = true;
+                }
+            })
+
+        await axios.get('http://localhost:5000/getPhone?phonenumber=' + phonenumber)
+            .then(res => res.data)
+            .then(data => {
+                if(data.length > 0) {
+                    console.log("phonenumber already exists");
+                    flag = true;
+                }
+            })
+
+        
+
+        if(flag)
+            return;
 
         const user = {
             username: username,
@@ -36,18 +74,50 @@ const Signup = () => {
             email: email,
             phonenumber: phonenumber
         }
-
-        axios.post('http://localhost:5000/register', user)
-        
+        console.log("reach");
+        try {        
+            await createUserWithEmailAndPassword(email, password);
+            const user = firebase.auth().currentUser;
+            const phoneCredential = firebase.auth.PhoneAuthProvider.credential(
+                verificationId,
+                otp
+            );
+            await user.linkWithCredential(phoneCredential);
+            
+            navigate('/');
+        } catch (error) {
+            console.error(error);
+        }
+        axios.post('http://localhost:5000/register', user);
     }
     const handleGoogleSignIn = () => {
         signInWithGoogle();
     }
+
     
-    if(user){
-        navigate('/')
-        console.log(user.phonenumber)
+    const sendOTP = async () => {
+        try {
+            const phoneProvider = new firebase.auth.PhoneAuthProvider(auth);
+            const verifier = new firebase.auth.RecaptchaVerifier(
+                'recaptcha-container',
+                { 
+                    size: 'invisible',
+                    defaultCountry : "IN"
+                }
+            )
+
+            const verificationId = await phoneProvider.verifyPhoneNumber(
+              "+91" + phonenumber,
+              verifier
+            );
+            setVerificationId(verificationId);
+            setOtpSent(true);
+            console.log('OTP sent successfully');
+          } catch (error) {
+            console.error('Error sending OTP:', error);
+          }
     }
+
     if(googleUser){
         navigate('/')
         console.log(googleUser)
@@ -102,6 +172,21 @@ const Signup = () => {
                         placeholder='Phone Number'
                         onChange={(e) => setPhoneNumber(e.target.value)} 
                         />
+                        <div id="sign-in-button"></div>
+                        {
+                            otpSent ?
+                            <input 
+                                type="text"
+                                className='phonenumber'
+                                placeholder='OTP'
+                                onChange={(e) => setOtp(e.target.value)} 
+                            /> : 
+                            <div className="btn-Login" onClick={sendOTP} style={{width: "200px"}} >
+                                <button type='button' className='btn'>Send OTP</button>
+                            </div>
+                        }
+                        
+                        <div id="recaptcha-container"></div>
                         <div className="btn-Login">
                             <button type='submit' className='btn'>Sign Up</button>
                         </div>
@@ -110,9 +195,9 @@ const Signup = () => {
                     <hr />
                     <div className='google-button'>
                         <GoogleButton 
-                        className='g-btn'
-                        type='light'
-                        onClick={handleGoogleSignIn}
+                            className='g-btn'
+                            type='light'
+                            onClick={handleGoogleSignIn}
                         />
                     </div>
                     <div>
@@ -128,7 +213,7 @@ const Signup = () => {
                         >
                         Login
                         </Link>
-                    </ div>
+                    </div>
                 </div>
             </div>
         </div>
