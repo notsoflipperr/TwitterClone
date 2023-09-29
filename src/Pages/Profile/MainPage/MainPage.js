@@ -7,7 +7,7 @@ import useLoggedInUser from '../../../Hooks/useLoggedInUser';
 import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import AddLinkIcon from '@mui/icons-material/AddLink';
-import Posts from '../../Feed/Posts/Posts';
+import Posts from '../../Feed/Posts/PostX';
 import axios from 'axios';
 import EditProfile from '../EditProfile/EditProfile';
 
@@ -21,12 +21,14 @@ const MainPage = ({ user }) => {
     // console.log(user)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/userPost?email=${user?.email}`)
-        .then(res => res.json())
-        .then(data => {
-            setPosts(data)
-        })
-    }, [posts, user?.email])
+        if(loggedInUser[0]?._id) {
+          fetch(`http://localhost:5000/userPost?userid=${loggedInUser[0]?._id}`)
+          .then(res => res.json())
+          .then(data => {
+              setPosts(data)
+          })
+        }
+    }, [loggedInUser[0]])
 
     const username = user?.email?.split('@')[0];
     

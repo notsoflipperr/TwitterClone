@@ -13,6 +13,7 @@ const TweetBox = () => {
     const [isLoading, setIsLoading] = useState('');
     const [name, setName] = useState('');
     const [username, setUserName] = useState('');
+    const [userId, setUserId] = useState('');
     const [loggedInUser] = useLoggedInUser();
     //console.log(loggedInUser)
     const [user] = useAuthState(auth);
@@ -41,27 +42,25 @@ const TweetBox = () => {
 
     const handleTweet = async (e) => {
         e.preventDefault();
+        console.log(user);
         if(user.providerData[0].providerId === 'password'){
             await fetch(`http://localhost:5000/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
-                        setUserName(data[0]?.username)
+                    setUserName(data[0]?.username)
                 })
         }
         else{
             setName(user?.displayName)
             setUserName(email?.split('@')[0])
         }
-        console.log(username);
-        if(username){
+        console.log(loggedInUser);
+        if(loggedInUser[0]?._id){
             const userPost = {
-                profilePhoto: userProfilePic,
                 post: post,
                 photo: imageURL,
-                username: username,
-                name: name,
-                email: email
+                userId: loggedInUser[0]?._id
             }
             console.log(userPost)
             setPost('');
