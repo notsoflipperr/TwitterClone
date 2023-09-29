@@ -39,22 +39,22 @@ const TweetBox = () => {
 
     }
 
-    const handleTweet = (e) => {
+    const handleTweet = async (e) => {
         e.preventDefault();
         if(user.providerData[0].providerId === 'password'){
-            fetch(`http://localhost:5000/loggedInUser?email=${email}`)
-        .then(res => res.json())
-        .then(data => {
-            setName(data[0]?.name)
-                setUserName(data[0]?.username)
-        })
+            await fetch(`http://localhost:5000/loggedInUser?email=${email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setName(data[0]?.name)
+                        setUserName(data[0]?.username)
+                })
         }
         else{
             setName(user?.displayName)
             setUserName(email?.split('@')[0])
         }
-
-        if(name){
+        console.log(username);
+        if(username){
             const userPost = {
                 profilePhoto: userProfilePic,
                 post: post,
@@ -63,7 +63,7 @@ const TweetBox = () => {
                 name: name,
                 email: email
             }
-            //console.log(userPost)
+            console.log(userPost)
             setPost('');
             setImageURL('');
             fetch(`http://localhost:5000/post`, {
@@ -72,11 +72,16 @@ const TweetBox = () => {
                     'content-type':'application/json'
                  },
                 body: JSON.stringify(userPost)
-        })
+            })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
                 })
+            .catch( e => {
+                console.error(e);
+            })
+        } else {
+            console.log("w");
         }
 
     }
