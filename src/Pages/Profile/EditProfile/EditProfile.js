@@ -32,6 +32,8 @@ function EditChild({ dob, setDob }) {
     setOpen(false);
   };
 
+ 
+
   return (
     <React.Fragment>
       <div className='birthdate-section' onClick={handleOpen}>
@@ -71,6 +73,8 @@ export default function EditProfile({ user, loggedInUser }) {
   const [website, setWebsite] = React.useState('');
   const [open, setOpen] = React.useState(false)
   const [dob, setDob] = React.useState('')
+  const [prof, setProf] = React.useState(true)
+  const [toggle, setToggle] = React.useState(false)
 
 
   const HandleSave = () => {
@@ -80,6 +84,7 @@ export default function EditProfile({ user, loggedInUser }) {
       location,
       website,
       dob,
+      prof,
     }
     console.log(editedInfo);
     fetch(`http://localhost:5000/userUpdates/${user?.email}`, {
@@ -94,6 +99,17 @@ export default function EditProfile({ user, loggedInUser }) {
         console.log('done', data);
       })
   }
+  
+  // const handleClick = () => {
+  //   console.log(prof);
+  //   setProf(!prof);
+  //   console.log(prof);
+    
+  // };
+
+
+ 
+
 
   return (
     <div >
@@ -142,6 +158,12 @@ export default function EditProfile({ user, loggedInUser }) {
                   }
                 </h2>
             }
+            <button 
+            onClick={() => setProf(!prof)} 
+            class="btn btn-primary mb-5">
+         Profile Status
+      </button>
+            
             <div className='last-btn'>
               <h2>Switch to professional </h2>
               <ChevronRightIcon />
