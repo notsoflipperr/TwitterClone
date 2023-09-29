@@ -1,7 +1,7 @@
 
 
 
-import React from "react";
+import React, { useEffect } from "react";
 import "./Posts.css";
 import { Avatar } from "@mui/material";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser"
@@ -17,7 +17,12 @@ function Post({ p }) {
 
   const [loggedInUser] = useLoggedInUser();
 
-  const { name, username, photo, post, profilePhoto, prof } = p
+  const { name, username, photo, post, profilePhoto, prof, email } = p;
+
+  useEffect(() => {
+    console.log({email});
+    console.log(loggedInUser[0]?.email);
+  }, [])
   return (
     <div className="post">
       <div className="post__avatar">
@@ -32,18 +37,34 @@ function Post({ p }) {
               </span>
             </h3>
           </div>
-          //If condition to show or not
-         <div className="post__headerDescription">
-          <p>{post}</p>
+            {
+              //If condition to show or not
+            }
+          {
+            (prof && loggedInUser[0]?.email !== email) ?
+              <></> : 
+              <div className="post__headerDescription">
+                <p>{post}</p>
+              </div>
+          }
         </div>
-        </div>
-           <img src={photo} className="imgbr" alt="" /> 
-        <div className="post__footer">
-          <ChatBubbleOutlineIcon className="post__footer__icon" fontSize="small" />
-          <RepeatIcon className="post__footer__icon" fontSize="small" />
-          <FavoriteBorderIcon className="post__footer__icon" fontSize="small" />
-          <PublishIcon className="post__footer__icon" fontSize="small" />
-        </div>
+        {
+          (prof && loggedInUser[0]?.email !== email) ?
+            <div className="private_head">
+              <span>These Posts are Protected</span>
+              <span>Only confirmed followers have access to @{username}'s posts and complete profile.</span>
+            </div> :
+            <div>
+              <img src={photo} className="imgbr" alt="" /> 
+              <div className="post__footer">
+                <ChatBubbleOutlineIcon className="post__footer__icon" fontSize="small" />
+                <RepeatIcon className="post__footer__icon" fontSize="small" />
+                <FavoriteBorderIcon className="post__footer__icon" fontSize="small" />
+                <PublishIcon className="post__footer__icon" fontSize="small" />
+              </div>    
+            </div>
+        }
+        
       </div>
     </div>
   );
