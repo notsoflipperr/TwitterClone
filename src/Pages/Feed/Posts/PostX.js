@@ -10,19 +10,30 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
 import useLoggedInUser from '../../../Hooks/useLoggedInUser';
+import { useState } from "react";
 
 
 
 function Post({ p }) {
 
   const [loggedInUser] = useLoggedInUser();
+  
+  const [name, setName] = useState('');
+  const [username, setUserName] = useState('');
+  const [profilePhoto, setProfilePhoto] = useState('');
+  const [prof, setProf] = useState('');
+  const [email, setEmail] = useState('');
 
-  const { name, username, photo, post, profilePhoto, prof, email } = p;
+  const { photo, post, user } = p;
 
   useEffect(() => {
-    console.log({email});
-    console.log(loggedInUser[0]?.email);
-  }, [])
+    setName(user[0]?.name);
+    setUserName(user[0]?.username);
+    setProfilePhoto(user[0]?.profilePhoto);
+    setEmail(user[0]?.email);
+    setProf(user[0]?.prof);
+    
+  }, [user, email, prof])
   return (
     <div className="post">
       <div className="post__avatar">
