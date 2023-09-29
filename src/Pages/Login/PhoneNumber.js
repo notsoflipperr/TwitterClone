@@ -23,7 +23,7 @@ const PhoneNumber = () => {
   // const username = "nsfw"
 
   useEffect(()=>{
-    fetch(`http://localhost:5000/getPhone?phonenumber=${phonenumber}`)
+    fetch(`https://twitter-clone-f5od.onrender.com/getPhone?phonenumber=${phonenumber}`)
     .then(res => res.json())
     .then(data => {
         setUser(data)

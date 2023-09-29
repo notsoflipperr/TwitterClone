@@ -29,7 +29,7 @@ function Post({ p }) {
   useEffect(() => {
     setName(user[0]?.name);
     setUserName(user[0]?.username);
-    setProfilePhoto(user[0]?.profilePhoto);
+    setProfilePhoto(user[0]?.profileImage);
     setEmail(user[0]?.email);
     setProf(user[0]?.prof);
     

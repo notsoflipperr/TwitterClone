@@ -45,7 +45,7 @@ const Signup = () => {
         e.preventDefault();
         let flag = false;
 
-        await axios.get('http://localhost:5000/loggedInUser?email=' + email)
+        await axios.get('https://twitter-clone-f5od.onrender.com/loggedInUser?email=' + email)
             .then(res => res.data)
             .then(data => {
                 if(data.length > 0) {
@@ -54,7 +54,7 @@ const Signup = () => {
                 }
             })
 
-        await axios.get('http://localhost:5000/getPhone?phonenumber=' + phonenumber)
+        await axios.get('https://twitter-clone-f5od.onrender.com/getPhone?phonenumber=' + phonenumber)
             .then(res => res.data)
             .then(data => {
                 if(data.length > 0) {
@@ -88,7 +88,7 @@ const Signup = () => {
         } catch (error) {
             console.error(error);
         }
-        axios.post('http://localhost:5000/register', user);
+        axios.post('https://twitter-clone-f5od.onrender.com/register', user);
     }
     const handleGoogleSignIn = () => {
         signInWithGoogle();
