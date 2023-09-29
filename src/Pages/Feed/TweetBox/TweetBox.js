@@ -44,7 +44,7 @@ const TweetBox = () => {
         e.preventDefault();
         console.log(user);
         if(user.providerData[0].providerId === 'password'){
-            await fetch(`http://localhost:5000/loggedInUser?email=${email}`)
+            await fetch(`https://twitter-clone-f5od.onrender.com/loggedInUser?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     setName(data[0]?.name)
@@ -65,7 +65,7 @@ const TweetBox = () => {
             console.log(userPost)
             setPost('');
             setImageURL('');
-            fetch(`http://localhost:5000/post`, {
+            fetch(`https://twitter-clone-f5od.onrender.com/post`, {
                 method: 'POST',
                 headers: {
                     'content-type':'application/json'
