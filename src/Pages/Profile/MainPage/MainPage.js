@@ -18,6 +18,7 @@ const MainPage = ({ user }) => {
     const [loggedInUser]= useLoggedInUser();
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState('');
+    // console.log(user)
 
     useEffect(() => {
         fetch(`http://localhost:5000/userPost?email=${user?.email}`)
